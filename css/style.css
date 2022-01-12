@@ -4,9 +4,21 @@
     box-sizing: border-box;
 };
 
+.fas {
+content: "\f234";
+font-family: "Font Awesome 5 Free";
+font-weight: 900;
+};
+
 .output-icons {
     display: flex;
     flex-wrap: wrap;
+};
+
+.box {
+    display: flex;
+    margin: 50px;  
+    border: 2px solid red;
 };
 
 .blue {
