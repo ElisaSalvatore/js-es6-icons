@@ -145,8 +145,10 @@ printIcons(containerIcons, iconsList)
 
 //UTILIZZARE .filter PER FILTRARE LE ICONE (.value)
 function doSelect(propertyName, selectValue) {
-	const filtredIcons = iconsList.filter(function(event, icon){
-		// qui dentro filtrerai usando icon[propertyName] === selectValue || selectValue === 'all'
+	const filtredIcons = iconsList.filter(function(icon){
+		//propertyName e selectValue sono dei parametri che possono essere utilizzati
+		// per filtrare gli oggetti. Una volta filtrati la property e la value verrano 
+		// specificati nel richiamo della funzione doSelect all'interno della selectElement [line 173, 181]
 		if (selectValue === icon[propertyName] || selectValue === 'all'){
 			return true;
 		}
@@ -156,7 +158,7 @@ function doSelect(propertyName, selectValue) {
 	printIcons(containerIcons, filtredIcons);
 };
 doSelect('type', selectElementType.value);
-
+doSelect('color', selectElementColor.value);
 
 // Milestone 3
 // Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone 
@@ -164,31 +166,59 @@ doSelect('type', selectElementType.value);
 //visualizzare solamente le icone corrispondenti.
 
 //UTILIZZARE SelectElement PER SELEZIONARE GLI ELEMENTI 
+// --------- SELECT PER TYPE
+selectElementType.addEventListener('change', function(event) {
+	printIcons(containerIcons, iconsList);
+
+	doSelect('type', selectElementType.value);
+	// console.log(selectElementType.value)
+});
+
+// --------- SELECT PER COLOR
+selectElementColor.addEventListener('change', function(event) {
+	printIcons(containerIcons, iconsList);
+
+	doSelect('color', selectElementColor.value);
+	// console.log(selectElementColor.value)
+});
+
+/* SE NON AVESSI UTILIZZATO LA FUNZIONE CON IL PARAMETRI MA AVESSI FATTO UNA SELECT PER OGNI VALUE DA FILTRARE:
+
+// Milestone 3
+// Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone
+//(animal, vegetable, user). Quando l’utente seleziona un tipo dalla select,
+//visualizzare solamente le icone corrispondenti.
+
+//UTILIZZARE SelectElement PER SELEZIONARE GLI ELEMENTI
+//UTILIZZARE .filter PER FILTRARE LE ICONE (.value)
+const selectElementType = document.querySelector('.filter-type');
+const selectElementColor = document.querySelector('.filter-color');
 
 // SELECT PER TYPE
 selectElementType.addEventListener('change', function(event) {
-	
-	// const filtredIcons = iconsList.filter(function(icon) {
-	// 	// if (selectElementType.value === icon.type || selectElementType.value === 'all'){
-	// 	// 	return true;
-	// 	// }
-	// 	// return false;
-	// 	return selectElementType.value === icon.type || selectElementType.value === 'all';
-	// })
-	printIcons(containerIcons, iconsList);
-	doSelect('type', selectElementType.value);
-	console.log(selectElementType.value)
+containerIcons.innerHTML = '';
+const filtredIcons = iconsList.filter(function(icon) {
+// if (selectElementType.value === icon.type || selectElementType.value === 'all'){
+// return true;
+// }
+// return false;
+return selectElementType.value === icon.type || selectElementType.value === 'all';
+})
 
+printIcons(containerIcons, filtredIcons);
+// console.log(selectElementType.value)
+// console.log(filtredIcons)
 });
 
-// // SELECT PER COLOR
-// selectElementColor.addEventListener('change', function(event) {
-// 	containerIcons.innerHTML = '';
-// 	const filtredIcons = iconsList.filter(function(icon) {
-// 		return selectElementColor.value === icon.color || selectElementColor.value === 'all';
-// 	})
+// SELECT PER COLOR
+selectElementColor.addEventListener('change', function(event) {
+containerIcons.innerHTML = '';
+const filtredIcons = iconsList.filter(function(icon) {
+return selectElementColor.value === icon.color || selectElementColor.value === 'all';
+})
 
-// 	printIcons(containerIcons, filtredIcons);
-// 	// console.log(selectElementColor.value)
-// 	// console.log(filtredIcons)
-// });
+printIcons(containerIcons, filtredIcons);
+// console.log(selectElementColor.value)
+// console.log(filtredIcons)
+});
+*/
