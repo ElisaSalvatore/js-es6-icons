@@ -138,12 +138,10 @@ function createBoxIcons(element){
 
 const containerIcons = document.querySelector('.container-icons');
 
-function showIcons(containerIcons,iconsList) {
-	iconsList.forEach((element) => {
-		containerIcons.innerHTML += createBoxIcons(element);
-	});
-}
-showIcons (containerIcons, iconsList)
+iconsList.forEach((element) => {
+	containerIcons.innerHTML += createBoxIcons(element);
+});
+
 
 //UTILIZZARE SELECT ELEMENT - DA FINIRE
 const selectElement = document.querySelector('.filter');
