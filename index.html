@@ -11,19 +11,30 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <header>
+        <h1>FontIcons</h1>
 
-    <select class="filter">
-        <option class="button" value="all">All</option>
-        <option class="button" value="animals">animals</option>
-        <option class="button" value="vegetables">vegetables</option>
-        <option class="button" value="user">user</option>
-    </select>
-    
-    <div class="container-icons d-flex flex-wrap">
+        <select class="filter-type">
+            <option class="button" value="all">All</option>
+            <option class="button" value="animal">Animals</option>
+            <option class="button" value="vegetable">Vegetables</option>
+            <option class="button" value="user">User</option>
+        </select>
+
+        <select class="filter-color">
+            <option class="button" value="all">All</option>
+            <option class="button" value="blue">Blue</option>
+            <option class="button" value="orange">Orange</option>
+            <option class="button" value="purple">Purple</option>
+        </select>
+    </header>
+
+    <div class="container-icons d-flex flex-wrap justify-content-center">
         <!-- printed boxes js-->
     </div>
 
     <script src="./js/script.js"></script>
 </body>
 </html>
+
 
