@@ -24,7 +24,7 @@ header > h1 {
     width: 180px;
     height: 80px;
     margin: 10px;
-    border: 2px solid red;
+    border: 1px solid lightslategray;
     border-radius: 15px;
 } 
 
