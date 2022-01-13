@@ -116,30 +116,43 @@ const iconsList = [
 // Milestone 1
 // Partendo dalla struttura dati fornita, visualizzare in pagina un box per ogni icona, 
 // in cui è presente il nome dell’icona e l’icona stessa.
-const containerIcons = document.querySelector('.container-icons');
 
-iconsList.forEach(function(element) {
-    const createBox = document.createElement('div');
-    createBox.className = `box ${element.family} ${element.prefix}${element.name}`;
-
-    // Milestone 2
-    // Ciascuna icona ha una proprietà “color”: 
-    // utilizzare questa proprietà per visualizzare le icone del colore corrispondente.
-    createBox.classList.add(element.color);
-    containerIcons.append(createBox);
-});
+// Milestone 2
+// Ciascuna icona ha una proprietà “color”: 
+// utilizzare questa proprietà per visualizzare le icone del colore corrispondente.
 
 // Milestone 3
 // Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone 
 //(animal, vegetable, user). Quando l’utente seleziona un tipo dalla select, 
 //visualizzare solamente le icone corrispondenti.
 
-// PROVA FILTER - NON FUNZIONA 
-const animalsArrayFilter = iconsList.filter(function(type) {
-	const firstChar = type[0];
-	if (firstChar === 'a') {
-		return true;
-	} 
-	return false;
-})
-console.log(animalsArrayFilter);
+function createBoxIcons(element){
+	return `
+		<div class="box ${element.color}">
+			<i class="${element.family} ${element.prefix}${element.name}">
+				<div class="printed-name">${element.name}</div>
+			</i>
+		</div> 
+	`
+};
+
+const containerIcons = document.querySelector('.container-icons');
+
+function showIcons(containerIcons,iconsList) {
+	iconsList.forEach((element) => {
+		containerIcons.innerHTML += createBoxIcons(element);
+	});
+}
+showIcons (containerIcons, iconsList)
+
+//UTILIZZARE SELECT ELEMENT - DA FINIRE
+const selectElement = document.querySelector('.filter');
+
+selectElement.addEventListener('change', (event) => {
+	const filtredIcons = iconsList.filter((element) => {
+		if (element.type === 'a') {
+			return true;
+		};
+		return false;
+	})
+});
