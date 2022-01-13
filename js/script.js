@@ -121,23 +121,42 @@ const iconsList = [
 // Ciascuna icona ha una proprietà “color”: 
 // utilizzare questa proprietà per visualizzare le icone del colore corrispondente.
 
-function createBoxIcons(element){
+const containerIcons = document.querySelector('.container-icons');
+const selectElementType = document.querySelector('.filter-type');
+const selectElementColor = document.querySelector('.filter-color');
+
+
+function createBoxIcons(icon){
 	return `
-		<div class="box d-flex flex-column justify-content-center align-items-center ${element.color}">
-			<i class="${element.family} ${element.prefix}${element.name}"></i>
-			<div class="printed-name">${element.name.toUpperCase()}</div>
+		<div class="box d-flex flex-column justify-content-center align-items-center ${icon.color}">
+			<i class="${icon.family} ${icon.prefix}${icon.name}"></i>
+			<div class="printed-name">${icon.name.toUpperCase()}</div>
 		</div> 
 	`
 };
 
-const containerIcons = document.querySelector('.container-icons');
-
 function printIcons(containerIcons, iconsList) {
+	containerIcons.innerHTML = '';
 	iconsList.forEach((icon) => {
 		containerIcons.innerHTML += createBoxIcons(icon);
 	});
 };
-printIcons(containerIcons, iconsList);
+printIcons(containerIcons, iconsList)
+
+//UTILIZZARE .filter PER FILTRARE LE ICONE (.value)
+function doSelect(propertyName, selectValue) {
+	const filtredIcons = iconsList.filter(function(event, icon){
+		// qui dentro filtrerai usando icon[propertyName] === selectValue || selectValue === 'all'
+		if (selectValue === icon[propertyName] || selectValue === 'all'){
+			return true;
+		}
+		return false;
+	})
+	// poi mostrerai i risultati filtrati
+	printIcons(containerIcons, filtredIcons);
+};
+doSelect('type', selectElementType.value);
+
 
 // Milestone 3
 // Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone 
@@ -145,34 +164,31 @@ printIcons(containerIcons, iconsList);
 //visualizzare solamente le icone corrispondenti.
 
 //UTILIZZARE SelectElement PER SELEZIONARE GLI ELEMENTI 
-//UTILIZZARE .filter PER FILTRARE LE ICONE (.value)
-const selectElementType = document.querySelector('.filter-type');
-const selectElementColor = document.querySelector('.filter-color');
 
 // SELECT PER TYPE
 selectElementType.addEventListener('change', function(event) {
-	containerIcons.innerHTML = '';
-	const filtredIcons = iconsList.filter(function(icon) {
-		// if (selectElementType.value === icon.type || selectElementType.value === 'all'){
-		// 	return true;
-		// }
-		// return false;
-		return selectElementType.value === icon.type || selectElementType.value === 'all';
-	})
+	
+	// const filtredIcons = iconsList.filter(function(icon) {
+	// 	// if (selectElementType.value === icon.type || selectElementType.value === 'all'){
+	// 	// 	return true;
+	// 	// }
+	// 	// return false;
+	// 	return selectElementType.value === icon.type || selectElementType.value === 'all';
+	// })
+	printIcons(containerIcons, iconsList);
+	doSelect('type', selectElementType.value);
+	console.log(selectElementType.value)
 
-	printIcons(containerIcons, filtredIcons);
-	// console.log(selectElementType.value)
-	// console.log(filtredIcons)
 });
 
-// SELECT PER COLOR
-selectElementColor.addEventListener('change', function(event) {
-	containerIcons.innerHTML = '';
-	const filtredIcons = iconsList.filter(function(icon) {
-		return selectElementColor.value === icon.color || selectElementColor.value === 'all';
-	})
+// // SELECT PER COLOR
+// selectElementColor.addEventListener('change', function(event) {
+// 	containerIcons.innerHTML = '';
+// 	const filtredIcons = iconsList.filter(function(icon) {
+// 		return selectElementColor.value === icon.color || selectElementColor.value === 'all';
+// 	})
 
-	printIcons(containerIcons, filtredIcons);
-	// console.log(selectElementColor.value)
-	// console.log(filtredIcons)
-});
+// 	printIcons(containerIcons, filtredIcons);
+// 	// console.log(selectElementColor.value)
+// 	// console.log(filtredIcons)
+// });
